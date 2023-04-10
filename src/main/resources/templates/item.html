@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  </head>
+<body>
+<div>
+  <h1 th:text="#{items_title}"></h1>
+  <ol>
+    <li th:each="item,state:${items}">
+      <ul>
+        <li th:text="#{index_name}+ ${state.index}"></li>
+        <li th:text="#{name_name}+':'+${item.name}"></li>
+        <li th:text="#{price_name}+':'+${item.price}+#{currency_symbol}"></li>
+        <li th:if="${category==null}" th:text="#{category_name}+':'+${item.category.cat_name}"></li></ul>
+      </li>
+  </ol>
+</div>
+</body>
+</html>

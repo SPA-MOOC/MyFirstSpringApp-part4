@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div class="container">
+<h1 th:text="|Items in cart|"></h1>
+
+<ol>
+    <li th:each="item:${cart}">
+        <ul>
+        <li th:text="|Name: ${item.name}|"></li>
+            <li th:text="|Price: ${item.price} zł|"></li>
+            <li th:text="|Category: ${item.category.cat_name}|"></li></ul>
+    </li>
+</ol>
+</div>
+</body>
+</html>
