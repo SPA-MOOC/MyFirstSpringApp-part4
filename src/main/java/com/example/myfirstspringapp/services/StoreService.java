@@ -1,55 +1,34 @@
-package pawww.example.store.services;
+package com.example.myfirstspringapp.services;
 
-import lombok.Getter;
+import com.example.myfirstspringapp.data.Category;
+import com.example.myfirstspringapp.data.Item;
+import com.example.myfirstspringapp.repositories.Cart;
+import com.example.myfirstspringapp.repositories.ItemRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pawww.example.store.controllers.DataNotFoundException;
-import pawww.example.store.data.Category;
-import pawww.example.store.data.Item;
-import pawww.example.store.repositories.Cart;
-import pawww.example.store.repositories.ItemRepository;
-
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
-@Getter
 public class StoreService {
     @Autowired
     ItemRepository items;
     @Autowired
     Cart cart;
-
-
-
-    public void addToCart(Item item){
-        this.cart.addItem(item);
+    public List<Item> getItemsFromRepository() {return this.items.getItems();}
+    public List<Item> getCart() {return cart.getItems();}
+    public Item getItemFromRepository(int id){
+        return  this.items.getItem(id);
     }
-
-
-    public Item getItem(int id){
-        return  items.getItem(id);
-    }
-
-
-    public Category getCategory(String name){
+    public Category getCategoryFromRepository(String name){
         return this.items.getCategory(name);
     }
-
-    public void addItem(Item item){
-        this.items.addItem(item);
-    }
-
-    public void removeItem(int id){
-        this.items.removeItem(id);
-    }
-
-
-
     public List<Item> getItemsFromCategory(String category){
-        return items.getItemsFromCategory(category);
+        return this.items.getItemsFromCategory(category);
+    }
+    public void addItemToCart(int id){
+        Item item=this.items.getItem(id);
+        if(item!=null) this.cart.addItem(item);
     }
 }
