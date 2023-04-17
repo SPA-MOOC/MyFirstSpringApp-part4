@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  </head>
+<body>
+<div>
+  <h1 th:text="#{items_title}"></h1>
+  <h3 th:if="${category!=null}" th:text="|Category:${category}|"></h3>
+  <div th:if="${category==null}">
+  <h2 th:text="'Filter category:'"></h2>
+    <form th:action="@{category}" method="get">
+      <input type="text" name="name">
+      <input type="submit" th:value="'Filter'">
+    </form>
+  </div>
+  <ol th:if="${items.size()>0}">
+    <li th:each="item,state:${items}">
+      <ul>
+        <li><a th:href="@{'/items/'+${state.index}}" th:text="#{name_name}+':'+${item.name}"></a></li>
+        <li th:if="${category==null}" th:text="#{category_name}+':'+${item.category.cat_name}"></li></ul>
+      <a th:href="@{'/cart/add/'+${state.index}}">Add to cart</a>
+      </li>
+  </ol>
+  <h3 th:if="${items.size()==0}">There is no items from this category</h3>
+  <button th:if="${category!=null}" onclick="history.back()" th:text="#{go_back}">Go back</button>
+</div>
+</body>
+</html>

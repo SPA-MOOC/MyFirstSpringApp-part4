@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<h1 th:text="|Items in cart|"></h1>
+    <h3 th:if="${cart.size()==0}">There is no items in cart</h3>
+<ol>
+    <li th:each="item:${cart}">
+        <ul>
+        <li th:text="|Name: ${item.name}|"></li>
+            <li th:text="|Price: ${item.price} zł|"></li>
+            <li th:text="|Category: ${item.category.cat_name}|"></li></ul>
+    </li>
+</ol>
+    <a th:href="@{/items/}" th:text="#{go_back}"/>
+</div>
+</body>
+</html>
