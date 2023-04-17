@@ -15,7 +15,8 @@ public class CartController {
     @GetMapping("/")
     public String getItemsInCart(Model model) {
         System.out.println("get cart in controller "+this.service.getItemsFromRepository());
-        model.addAttribute("cart",this.service.getCart());
+        model.addAttribute("cart",this.service.getCartItems());
+        model.addAttribute("prices",this.service.getCart().getPrices());
         return "cart";
     }
     @GetMapping("/add/{id}")

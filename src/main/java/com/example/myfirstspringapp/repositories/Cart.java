@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,4 +20,11 @@ public class Cart {
     public void addItem(Item item){
         this.items.add(item);
     }
+
+    public List<Float> getPrices(){
+        List<Float> prices=new ArrayList<>();
+        for(Item item:items) prices.add(item.getPrice());
+        return prices;
+    }
 }
+

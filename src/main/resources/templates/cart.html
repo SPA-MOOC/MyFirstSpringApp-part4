@@ -6,6 +6,7 @@
 </head>
 <body>
 <div>
+    <span th:insert="menu :: menu"> </span>
 <h1 th:text="|Items in cart|"></h1>
     <h3 th:if="${cart.size()==0}">There is no items in cart</h3>
 <ol>
@@ -16,7 +17,13 @@
             <li th:text="|Category: ${item.category.cat_name}|"></li></ul>
     </li>
 </ol>
+    <div th:if="${cart.size()>0}" th:with="zm=${prices}">
+        <p th:text="'Cart value '+${#numbers.formatDecimal(#aggregates.sum(zm),1,2,'POINT')}+#{currency_symbol}">Cart value</p>
+    </div>
+    <div>[[#{cart.promo.msg(#{promo.date})}]]</div>
+    
     <a th:href="@{/items/}" th:text="#{go_back}"/>
+
 </div>
 </body>
 </html>
