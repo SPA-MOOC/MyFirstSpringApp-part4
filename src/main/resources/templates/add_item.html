@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div class="container">
+    <span th:insert="~{menu :: menu}"></span>
+    <h1>Add new item</h1>
+    <form action="#" th:action="@{/items/manage/add}" th:object="${newItem}" method="post">
+        <p>Name: <input type="text" th:field="*{name}" /><span class="alert alert-primary" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span></p>
+        <p>Price: <input type="number" th:field="*{price}" step="0.1" /><span class="alert alert-primary" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span></p>
+        <span>
+             <select class="form-select form-select-lg mb-md-3" th:field="*{category}">
+             <option value="">select category</option>
+             <option th:each="option : ${categories}" th:value="${option.cat_name}" th:text="${option.cat_name}"></option>
+            </select>
+        </span><span class="alert alert-primary" th:if="${#fields.hasErrors('category.cat_name')}" th:errors="*{category.cat_name}">Category Error</span>
+
+<!--        @notempty-->
+        <span>
+             <select class="form-select form-select-lg mb-md-3" th:field="*{categories}" multiple>
+             <option value="">select category</option>
+             <option th:each="option : ${categories}" th:value="${option.cat_name}" th:text="${option.cat_name}"></option>
+            </select>
+        </span><span class="alert alert-primary" th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}">Category Error</span>
+
+
+        <p><input type="submit" value="Add" /> </p>
+    </form>
+</div>
+<span th:insert="~{menu :: footer}"></span>
+</body>
+</html>
